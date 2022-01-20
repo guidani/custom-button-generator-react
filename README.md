@@ -1,3 +1,3 @@
 # Custom Button Generator
 
-A simple Button generator.
+A Button generator using Reactjs + typescript.
