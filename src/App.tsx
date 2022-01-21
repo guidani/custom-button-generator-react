@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./App.css";
 import styled from "styled-components";
+import { Button } from './components/Button'
+import { Input } from './components/Input'
+
+interface IStateProps {
+  name: string,
+  color: string
+}
 
 function App() {
-  const [bgColor, setColor] = useState<string>("#fff");
-  const [text, setText] = useState<string>("button");
+ 
+  const [data, setData] = useState<IStateProps>({"name": "texto", "color": "#ffffff"})
+  
+  // functions 
+  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setData({...data, name: event.target.value});
+  }
 
-  const handleColorChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setColor(event.target.value);
-  };
-
-  const handleTextChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setText(event.target.value);
-  };
-
-  const Button = styled.button`
-    background-color: ${bgColor};
-  `;
+  const handleBackgroundColorChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setData({...data, color: event.target.value})
+  }
 
   const InputGroup = styled.div`
     display: flex;
@@ -40,10 +40,10 @@ function App() {
     <div>
       <Header>Custom Button Generator</Header>
       <InputGroup>
-        <input type="color" onChange={handleColorChange} />
-        <input type="text" onChange={handleTextChange} placeholder="Text inside button!"/>
+      <Input inputType={"text"} placeholder={"texto"} handleOnChange={handleTextChange} name={"texto"} value={data.name}/>
+      <Input inputType={"color"} handleOnChange={handleBackgroundColorChange} name={"color"} value={data.color}/>
       </InputGroup>
-      <Button>{text}</Button>
+      <Button/>
     </div>
   );
 }
