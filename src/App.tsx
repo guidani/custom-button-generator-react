@@ -5,28 +5,34 @@ import { Input } from "./components/Input";
 import { Header, InputGroup } from "./styles.style";
 
 interface IStateProps {
-  name: string;
-  color: string;
+  textInside: string;
+  textInsideColor: string;
+  backgroundColor: string;
 }
-
 
 function App() {
   const [data, setData] = useState<IStateProps>({
-    name: "texto",
-    color: "#000000",
+    textInside: "texto",
+    backgroundColor: "#000000",
+    textInsideColor: "#ffffff"
   });
 
   // functions
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, name: event.target.value });
+    setData({ ...data, textInside: event.target.value });
   };
 
   const handleBackgroundColorChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setData({ ...data, color: event.target.value });
+    setData({ ...data, backgroundColor: event.target.value });
   };
 
+  const handleTextInsideColorChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setData({ ...data, textInsideColor: event.target.value });
+  };
 
   return (
     <div>
@@ -37,16 +43,27 @@ function App() {
           placeholder={"texto"}
           handleOnChange={handleTextChange}
           name={"texto"}
-          value={data.name}
+          value={data.textInside}
         />
         <Input
           inputType={"color"}
           handleOnChange={handleBackgroundColorChange}
           name={"color"}
-          value={data.color}
+          value={data.backgroundColor}
+        />
+                <Input
+          inputType={"color"}
+          handleOnChange={handleTextInsideColorChange}
+          name={"textInsideColor"}
+          value={data.textInsideColor}
         />
       </InputGroup>
-      <ButtonStyled color={data.color} />
+      <ButtonStyled 
+      color={data.backgroundColor}
+      // textInsideColor={data.textInsideColor}
+      >
+        {data.textInside}
+      </ButtonStyled>
     </div>
   );
 }
